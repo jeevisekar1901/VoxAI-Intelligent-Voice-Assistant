@@ -173,7 +173,6 @@ The assistant will start listening for voice commands.
 
 Speak clearly into the microphone and wait for the assistant to process your command
 
-## Code##
 # pip install SpeechRecognition
 # pip install pyttsx3
 # pip install pywhatkit
@@ -246,17 +245,20 @@ def commands():
                       speak(bank + " bank account number is " + bank_account_numbers[bank])
 
 
-
             # if not recognized
             else:
                 speak("Please ask correct question")
-
 
 
     except:
         print('Error in capturing microphone...')
 
 commands()
+
+
+
+
+    
 
 
 # 🚀 Future Enhancements
