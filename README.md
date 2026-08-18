@@ -55,33 +55,7 @@ The complete project is developed using Python and uses various Python libraries
 
 🏗️ System Workflow
 
-The working process of the voice assistant can be represented as:
-
-```text
-User
-  ↓
-Speaks a Command
-  ↓
-Microphone Captures Voice
-  ↓
-Speech Recognition
-  ↓
-Voice → Text
-  ↓
-Command Analysis
-  ↓
-Identify Required Operation
-  ↓
-Perform Requested Task
-  ↓
-Generate Response
-  ↓
-Text-to-Speech
-  ↓
-Assistant Speaks Response 
-
-
- 💻 Installation and Setup
+💻 Installation and Setup
 
 Follow the steps below to run the project on your computer.
 
