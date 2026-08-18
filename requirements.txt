@@ -1,0 +1,8 @@
+python libraries required are:
+-SpeechRecognition
+-pyttsx3
+-wikipedia
+-PyAudio
+
+Then install everything at once with:
+ pip install -r requirements.txt
