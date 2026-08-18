@@ -173,135 +173,90 @@ The assistant will start listening for voice commands.
 
 Speak clearly into the microphone and wait for the assistant to process your command
 
-🗣️ Example Voice Commands
+## Code##
+# pip install SpeechRecognition
+# pip install pyttsx3
+# pip install pywhatkit
+# pip install wikipedia
 
-The assistant can be extended to understand commands such as:
-
-```text
-"What is the time?"
-"Who is Albert Einstein?"
-"Tell me about Python"
-"Who is Elon Musk?"
-"What is artificial intelligence?"
-```
-
-The exact commands supported depend on the implementation in `ai_assistant.py`.
-
-
-
-# 🧠 How the Assistant Works
-
-The project follows a simple voice-processing pipeline.
-
-# Step 1: Listen
-
-The microphone captures the user's voice.
-
-# Step 2: Recognize
-
-The Speech Recognition library processes the audio and converts it into text.
-
- # Step 3: Analyze
-
-The program checks the recognized text against predefined commands and keywords.
-
-# Step 4: Execute
-
-Depending on the command, the program performs an appropriate operation.
-
-For example:
-
-```text
-User: "What is the time?"
-             ↓
-Recognize command
-             ↓
-Get current system time
-             ↓
-Generate response
-             ↓
-Speak the time
-```
-
-# Step 5: Respond
-
-The `pyttsx3` library converts the generated text into speech and plays the response through the computer's speakers.
-
-
-
-# 🔧 Main Python Libraries
-
-## SpeechRecognition
-
-The **SpeechRecognition** library is used to recognize spoken language and convert audio input into text.
-
-Example:
-
-```python
 import speech_recognition as sr
-```
-
-
-
-## pyttsx3
-
-`pyttsx3` is used for text-to-speech conversion.
-
-It allows the assistant to speak responses through the computer's speakers.
-
-Example:
-
-```python
 import pyttsx3
-
-engine = pyttsx3.init()
-engine.say("Hello, how can I help you?")
-engine.runAndWait()
-```
-
-
-
-## Wikipedia
-
-The Wikipedia library can be used to retrieve information from Wikipedia.
-
-Example:
-
-```python
+import pywhatkit
 import wikipedia
-
-result = wikipedia.summary("Python programming", sentences=2)
-```
-
-
-
-## datetime
-
-The `datetime` module is used to obtain the current date and time.
-
-Example:
-
-```python
 import datetime
 
-current_time = datetime.datetime.now().strftime("%H:%M")
+r = sr.Recognizer()
+phone_numbers = {"ravi": "1234567890", "john": "0987654321", "alice": "5555555555"}
+bank_account_numbers = {"tt": "1111222233334444", "mm": "5555666677778888"}
+
+def speak(command):
+    engine = pyttsx3.init()
+    voices = engine.getProperty('voices')
+    engine.setProperty('voice', voices[1].id)  
+    engine.say(command)
+    engine.runAndWait()
+
+def commands():
+    try:
+        with sr.Microphone() as source:
+            r.adjust_for_ambient_noise(source)
+            print('Listening... Ask now...')
+            audioin = r.listen(source)
+            my_text = r.recognize_google(audioin)
+            my_text = my_text.lower()
+            print(my_text)
+
+            # ask to play a song
+            if 'play' in my_text:
+                my_text = my_text.replace('play','')
+                speak('playing' + my_text)
+                pywhatkit.playonyt(my_text)
+
+            # ask date
+            if 'date' in my_text:
+                today = datetime.date.today()
+                speak(today)
+
+            # ask time
+            if 'time' in my_text:
+                timenow = datetime.datetime.now().strftime('%H:%M')
+                speak(timenow)
+
+            # ask details about any person
+            if 'who is' in my_text:
+                my_text = my_text.replace('who is','')
+                info = wikipedia.summary(person,1)
+                speak(info)
+
+            # ask phone numbers
+            if "phone number" in my_text:
+                names = list (phone_numbers)
+                print(names)
+                for name in names:
+                    if name in my_text:
+                      print(name + " phone number is " + phone_numbers[name])
+                      speak(name + " phone number is " + phone_numbers[name])
+
+            #ask personal bank account numbers
+            if "bank account number" in my_text:
+                banks = list (bank_account_numbers)
+                for bank in banks:
+                    if bank in my_text:
+                      print(bank + " bank account number is " + bank_account_numbers[bank])
+                      speak(bank + " bank account number is " + bank_account_numbers[bank])
 
 
-# 🔐 Security and Privacy
 
-This project is intended as an educational voice-assistant application.
+            # if not recognized
+            else:
+                speak("Please ask correct question")
 
-The project should not store or expose sensitive information such as:
 
-* Passwords
-* API keys
-* Authentication tokens
-* Personal account numbers
-* Private credentials
 
-Do not upload confidential information to GitHub.
+    except:
+        print('Error in capturing microphone...')
 
-If configuration files contain sensitive values, store them in environment variables or `.env` files and add `.env` to `.gitignore`.
+commands()
 
 
 # 🚀 Future Enhancements
