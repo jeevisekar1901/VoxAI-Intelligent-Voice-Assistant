@@ -173,8 +173,7 @@ The assistant will start listening for voice commands.
 
 Speak clearly into the microphone and wait for the assistant to process your command
 
-
-# 🗣️ Example Voice Commands
+🗣️ Example Voice Commands
 
 The assistant can be extended to understand commands such as:
 
@@ -228,7 +227,7 @@ Speak the time
 
 The `pyttsx3` library converts the generated text into speech and plays the response through the computer's speakers.
 
----
+
 
 # 🔧 Main Python Libraries
 
@@ -242,7 +241,7 @@ Example:
 import speech_recognition as sr
 ```
 
----
+
 
 ## pyttsx3
 
@@ -260,7 +259,7 @@ engine.say("Hello, how can I help you?")
 engine.runAndWait()
 ```
 
----
+
 
 ## Wikipedia
 
@@ -274,7 +273,7 @@ import wikipedia
 result = wikipedia.summary("Python programming", sentences=2)
 ```
 
----
+
 
 ## datetime
 
@@ -286,9 +285,7 @@ Example:
 import datetime
 
 current_time = datetime.datetime.now().strftime("%H:%M")
-```
 
----
 
 # 🔐 Security and Privacy
 
@@ -306,7 +303,6 @@ Do not upload confidential information to GitHub.
 
 If configuration files contain sensitive values, store them in environment variables or `.env` files and add `.env` to `.gitignore`.
 
----
 
 # 🚀 Future Enhancements
 
@@ -353,6 +349,8 @@ Use NLP techniques to understand more complex user commands instead of relying o
 ## 🔒 Voice Authentication
 
 Implement speaker recognition so that the assistant can identify authorized users.
+
+
 
 
 
